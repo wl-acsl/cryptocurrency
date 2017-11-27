@@ -1,1 +1,1 @@
-In development: Crypto currency!
+Basic cryptocurrency in development in preparation for CodeDay

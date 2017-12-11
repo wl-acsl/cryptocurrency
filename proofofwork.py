@@ -1,7 +1,7 @@
 import hashlib
 import time
 
-max_nonce = 2*32 # ~4 billion
+max_nonce = 2**32 # ~4 billion
 
 def proof_of_work(header, difficulty_num):
     target = 2**(256-difficulty_num)

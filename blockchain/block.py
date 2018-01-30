@@ -4,9 +4,8 @@ import time
 class Block:
     def __init__(self, index, timestamp, prev_hash, data):
         self.index = index
-        self.block_hash = block_hash
+        self.timestamp = timestamp
         self.prev_hash = prev_hash
-        self.merkle_root = merkle_root
         self.data = data
 
     def create_hash(self):

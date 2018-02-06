@@ -1,4 +1,5 @@
 from block import Block
+#import time
 
 BLOCKCHAIN = []
 PENDING_TX = []
@@ -28,3 +29,9 @@ class Blockchain:
 
     def get_latest_block(self):
         return self.chain[-1].readable()
+"""
+bc = Blockchain(BLOCKCHAIN)
+genesis = create_genesis()
+BLOCKCHAIN.append(genesis)
+print (bc.get_latest_block())
+"""

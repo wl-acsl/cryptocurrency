@@ -3,19 +3,25 @@ import os
 import hashlib
 import base58
 
-# Generate a keypair using ECDSA
-private_key = os.urandom(32).encode('hex')
-sign_key = ecdsa.SigningKey.from_string(private_key.decode('hex'), curve=ecdsa.SECP256k1)
-verif_key = signing_key.verifying_key
+class Wallet:
 
-public_key = ('\04'+verif_key.tostring()).encode('hex')
+    def generate_wallet(self):
+        # Generate a keypair using ECDSA
+        private_key = os.urandom(32).encode('hex')
+        sign_key = ecdsa.SigningKey.from_string(private_key.decode('hex'), curve=ecdsa.SECP256k1)
+        verif_key = sign_key.verifying_key
 
-# Generate a wallet address
-ripemd160 = hashlib.new('ripemd160')
-ripemd160.update(hashlib.sha256(public_key.decode('hex')).digest())
-middleman = '\00' + ripemd160.digest()
-checksum = hashlib.sha256(hashlib.sha256(middleman).digest()).digest()[:4]
+        public_key = ('\04'+str(verif_key)).encode('hex')
 
-wallet_address = base58.b58encode(middleman + checksum)
+        # Generate a wallet address
+        ripemd160 = hashlib.new('ripemd160')
+        ripemd160.update(hashlib.sha256(public_key.decode('hex')).digest())
+        middleman = '\00' + ripemd160.digest()
+        checksum = hashlib.sha256(hashlib.sha256(middleman).digest()).digest()[:4]
 
-# Handle connections and transactions -- to be filled in later
+        wallet_address = base58.b58encode(middleman + checksum)
+
+        print ("\nprivate key: " + private_key + "\n\npublic key: " + public_key + "\n\nwallet address: " + wallet_address+"\n")
+
+w = Wallet()
+w.generate_wallet()

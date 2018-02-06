@@ -11,7 +11,7 @@ class Block:
         self.prev_hash = prev_hash
         self.data = data
         self.nonce = nonce
-        self.block_hash = hashlib.sha256(str(index) + str(timestamp) + str(prev_hash) + str(data) + str(nonce)).hexdigest()
+        self.block_hash = hashlib.sha256((str(index) + str(timestamp) + str(prev_hash) + str(data) + str(nonce)).encode()).hexdigest()
 
     def get_hash(self):
         return self.block_hash

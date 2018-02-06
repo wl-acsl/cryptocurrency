@@ -2,14 +2,19 @@ import hashlib
 import time
 
 class Block:
-    def __init__(self, index, timestamp, prev_hash, data):
+
+    block_hash = ""
+
+    def __init__(self, index, timestamp, prev_hash, data, nonce):
         self.index = index
         self.timestamp = timestamp
         self.prev_hash = prev_hash
         self.data = data
+        self.nonce = nonce
+        self.block_hash = hashlib.sha256(str(index) + str(timestamp) + str(prev_hash) + str(data) + str(nonce)).hexdigest()
 
-    def create_hash(self):
-        return hashlib.sha256((str(index + timestamp + prev_hash + data)).encode('hex')).hexdigest()
+    def get_hash(self):
+        return self.block_hash
 
-    def create_genesis():
-        return Block(0, time.time(), "0", {"nonce": 1, "transactions": None})
+    def readable(self):
+        return "Block " + str(self.index) + " (" + str(self.get_hash()) + "); created " + str(self.timestamp) + "; prev hash: " + str(self.prev_hash) + "; data: " + str(self.data) + "; nonce: " + str(self.nonce)

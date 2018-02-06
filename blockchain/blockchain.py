@@ -1,5 +1,4 @@
 from block import Block
-import time
 
 BLOCKCHAIN = []
 PENDING_TX = []
